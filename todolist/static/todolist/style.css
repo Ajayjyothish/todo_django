@@ -1,0 +1,13 @@
+body{
+    background: #3399ff;
+
+}
+
+#wrapper{
+    margin-top: 10% !important;
+}
+
+#content{
+    background: #ffff99;
+    padding: 25px
+}

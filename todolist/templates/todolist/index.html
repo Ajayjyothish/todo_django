@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TodoList App</title>
+    <link
+      rel="stylesheet"
+      href="{% static 'todolist/bs/css/bootstrap.min.css' %}"
+    />
+    <link rel="stylesheet" href="{% static 'todolist/style.css' %}" />
+  </head>
+  <body>
+    <div class="container" id="content">
+      <div class="row">
+        <div class="col-lg-4 col-lg-offset-4">
+          <h1>What to do today</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-group mb-3 mx-3">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Enter todo eg. Wash my car"
+            aria-label="todo"
+            aria-describedby="basic-addon2"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-success" type="button">Button</button>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="btn btn-warning">Delete Completed</button>
+      <button type="button" class="btn btn-danger">Delete All</button>
+      <ul class="list-group mt-3">
+        {% for todolist in todo_list %}
+        {% if todolist.completed %} 
+        <li class="list-group-item todo-completed">{{todolist.text}}</li>
+        {% else %}
+        <a href="#" class="list-group-item">{{todolist.text}}</a>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </body>
+</html>
