@@ -19,29 +19,24 @@
         </div>
       </div>
       <div class="row">
-        <div class="input-group mb-3 mx-3">
-          <input
-            type="text"
-            class="form-control"
-            placeholder="Enter todo eg. Wash my car"
-            aria-label="todo"
-            aria-describedby="basic-addon2"
-          />
-          <div class="input-group-append">
-            <button class="btn btn-success" type="button">Button</button>
+        <form action="{% url 'add' %}" method="POST" role="form">
+          {% csrf_token %}
+          <div class="input-group mb-3 mx-3">
+            {{form.text}}
+            <div class="input-group-append">
+              <button class="btn btn-success" type="submit">Add</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
-      <button type="button" class="btn btn-warning">Delete Completed</button>
-      <button type="button" class="btn btn-danger">Delete All</button>
+      <a href="{%url 'deletecompleted'%}"><button type="button" class="btn btn-warning">Delete Completed</button></a>
+      <a href="{%url 'deleteall'%}"><button type="button" class="btn btn-danger">Delete All</button></a>
       <ul class="list-group mt-3">
-        {% for todolist in todo_list %}
-        {% if todolist.completed %} 
+        {% for todolist in todo_list %} {% if todolist.completed %}
         <li class="list-group-item todo-completed">{{todolist.text}}</li>
         {% else %}
-        <a href="#" class="list-group-item">{{todolist.text}}</a>
-        {% endif %}
-        {% endfor %}
+        <a href="{% url 'completed' todolist.id %}" class="list-group-item">{{todolist.text}}</a>
+        {% endif %} {% endfor %}
       </ul>
     </div>
   </body>
